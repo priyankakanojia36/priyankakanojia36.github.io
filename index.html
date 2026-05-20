@@ -1,0 +1,1553 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Priyanka Kanojia | Data Engineer & BI</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@300;400;500;600&family=Sentient:ital,wght@0,400;0,700;1,400;1,700&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #f8f9fd;
+  --bg2: #eef0f8;
+  --white: #ffffff;
+  --ink: #0b0d1a;
+  --ink2: #3a3f5c;
+  --ink3: #8087a8;
+  --indigo: #3d52d5;
+  --indigo-light: #eef0fb;
+  --indigo-mid: #c7cdf5;
+  --indigo-dark: #2a3a9e;
+  --green: #00b87a;
+  --green-light: #e6f9f3;
+  --amber: #f59e0b;
+  --red: #f43f5e;
+  --border: #e2e5f0;
+  --border2: #c8ccdf;
+  --shadow-sm: 0 1px 4px rgba(61,82,213,0.06);
+  --shadow: 0 4px 20px rgba(61,82,213,0.09);
+  --shadow-lg: 0 16px 48px rgba(61,82,213,0.14);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 15px; line-height: 1.65; overflow-x: hidden;
+}
+
+::-webkit-scrollbar { width: 3px; }
+::-webkit-scrollbar-track { background: var(--bg2); }
+::-webkit-scrollbar-thumb { background: var(--indigo); }
+
+/* ===================== NAV ===================== */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 300;
+  background: rgba(248,249,253,0.94);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border);
+  height: 60px; padding: 0 60px;
+  display: flex; align-items: center; justify-content: space-between;
+}
+
+.nav-brand {
+  display: flex; align-items: center; gap: 10px; text-decoration: none;
+}
+
+.nav-avatar {
+  width: 32px; height: 32px; border-radius: 50%;
+  background: var(--indigo);
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 12px; font-weight: 600; color: #fff;
+  overflow: hidden; flex-shrink: 0;
+}
+
+.nav-avatar img { width: 100%; height: 100%; object-fit: cover; }
+
+.nav-name {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 12px; font-weight: 600; color: var(--ink); letter-spacing: 0.02em;
+}
+
+.nav-links { display: flex; gap: 28px; list-style: none; align-items: center; }
+
+.nav-links a {
+  font-family: 'IBM Plex Mono', monospace; font-size: 11px;
+  color: var(--ink3); text-decoration: none;
+  letter-spacing: 0.08em; text-transform: uppercase; transition: color 0.2s;
+}
+
+.nav-links a:hover { color: var(--indigo); }
+
+.nav-resume {
+  color: var(--indigo) !important;
+  border-bottom: 1px solid var(--indigo-mid) !important;
+  padding-bottom: 1px;
+}
+
+.nav-hire {
+  background: var(--indigo) !important; color: #fff !important;
+  padding: 7px 20px; font-size: 11px !important;
+  transition: background 0.2s !important; border-radius: 2px;
+}
+
+.nav-hire:hover { background: var(--ink) !important; }
+
+/* ===================== HERO ===================== */
+#hero {
+  min-height: 100vh; padding-top: 60px;
+  display: grid; grid-template-columns: 1fr 1fr;
+  position: relative; overflow: hidden; background: var(--white);
+}
+
+#hero::before {
+  content: ''; position: absolute; inset: 0;
+  background-image:
+    linear-gradient(var(--border) 1px, transparent 1px),
+    linear-gradient(90deg, var(--border) 1px, transparent 1px);
+  background-size: 48px 48px; opacity: 0.35; pointer-events: none;
+}
+
+.hero-left {
+  padding: 80px 40px 80px 80px;
+  display: flex; flex-direction: column; justify-content: center;
+  position: relative; z-index: 2;
+}
+
+.hero-status {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-family: 'IBM Plex Mono', monospace; font-size: 11px;
+  color: var(--green); letter-spacing: 0.12em; text-transform: uppercase;
+  background: var(--green-light); border: 1px solid rgba(0,184,122,0.25);
+  padding: 6px 14px; border-radius: 100px;
+  margin-bottom: 36px; width: fit-content;
+  opacity: 0; animation: fadeUp 0.5s ease forwards 0.2s;
+}
+
+.status-dot {
+  width: 7px; height: 7px; background: var(--green);
+  border-radius: 50%; animation: pulse 2s infinite;
+}
+
+@keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.4;transform:scale(0.8)} }
+
+h1 {
+  font-family: 'Sentient', serif;
+  font-size: clamp(38px, 4vw, 60px); font-weight: 700;
+  line-height: 1.08; letter-spacing: -0.025em; margin-bottom: 24px;
+  opacity: 0; animation: fadeUp 0.6s ease forwards 0.35s;
+}
+
+h1 .accent { color: var(--indigo); font-style: italic; }
+
+.hero-sub {
+  font-size: 16px; color: var(--ink2); max-width: 500px;
+  line-height: 1.8; margin-bottom: 44px;
+  opacity: 0; animation: fadeUp 0.6s ease forwards 0.5s;
+}
+
+.hero-sub strong { color: var(--ink); font-weight: 500; }
+
+.hero-lanes {
+  display: flex; gap: 8px; flex-wrap: nowrap; margin-bottom: 40px;
+  opacity: 0; animation: fadeUp 0.6s ease forwards 0.65s;
+  overflow-x: auto;
+}
+
+.lane {
+  font-family: 'IBM Plex Mono', monospace; font-size: 10px;
+  padding: 5px 12px; border-radius: 100px;
+  letter-spacing: 0.03em; font-weight: 500; border: 1.5px solid;
+  white-space: nowrap; flex-shrink: 0;
+}
+
+.lane-de { background: var(--indigo-light); color: var(--indigo); border-color: var(--indigo-mid); }
+.lane-bi { background: #f0f7ff; color: #2563eb; border-color: #bfdbfe; }
+.lane-ml { background: #f0fdf8; color: var(--green); border-color: rgba(0,184,122,0.3); }
+.lane-bc { background: #fef9ec; color: var(--amber); border-color: rgba(245,158,11,0.3); }
+
+/* THREE CTAs */
+.hero-ctas {
+  display: flex; gap: 12px; flex-wrap: wrap;
+  opacity: 0; animation: fadeUp 0.6s ease forwards 0.8s;
+}
+
+.btn {
+  font-family: 'IBM Plex Mono', monospace; font-size: 12px;
+  font-weight: 500; letter-spacing: 0.05em; padding: 13px 28px;
+  text-decoration: none; transition: all 0.2s; display: inline-flex;
+  align-items: center; gap: 8px;
+  border: none; cursor: pointer; border-radius: 2px;
+}
+
+.btn-primary { background: var(--indigo); color: #fff; }
+.btn-primary:hover { background: var(--indigo-dark); transform: translateY(-1px); box-shadow: var(--shadow); }
+
+.btn-ghost { background: transparent; color: var(--indigo); border: 1.5px solid var(--indigo-mid); }
+.btn-ghost:hover { background: var(--indigo-light); border-color: var(--indigo); }
+
+/* RESUME BUTTON - distinct style */
+.btn-resume {
+  background: transparent; color: var(--ink2);
+  border: 1.5px solid var(--border2);
+}
+.btn-resume:hover { border-color: var(--ink2); color: var(--ink); background: var(--bg2); }
+
+.btn-resume svg { flex-shrink: 0; }
+
+/* ===================== HERO RIGHT - SIMPLE PHOTO ===================== */
+.hero-right {
+  position: relative; z-index: 2;
+  display: flex; align-items: center; justify-content: center;
+  padding: 60px 60px 60px 20px;
+}
+
+.photo-frame {
+  position: relative; width: 340px; height: 420px;
+}
+
+.photo-frame::before {
+  content: ''; position: absolute;
+  top: 16px; left: 16px; right: -16px; bottom: -16px;
+  background: var(--indigo-light); border: 2px solid var(--indigo-mid);
+  border-radius: 4px; z-index: 0;
+}
+
+.photo-wrapper {
+  position: relative; z-index: 1;
+  width: 100%; height: 100%;
+  border-radius: 4px; overflow: hidden;
+  border: 1px solid var(--border); box-shadow: var(--shadow-lg);
+}
+
+.photo-wrapper img {
+  width: 100%; height: 100%;
+  object-fit: cover; object-position: center top; display: block;
+}
+
+.photo-placeholder {
+  width: 100%; height: 100%;
+  background: var(--indigo-light);
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center; gap: 16px;
+}
+
+.photo-placeholder p {
+  font-family: 'IBM Plex Mono', monospace; font-size: 11px;
+  color: var(--ink3); letter-spacing: 0.08em; text-align: center;
+}
+
+.photo-tag {
+  position: absolute; bottom: -16px; left: -20px; z-index: 2;
+  background: var(--white); border: 1px solid var(--border);
+  box-shadow: var(--shadow); padding: 12px 18px;
+  display: flex; align-items: center; gap: 10px; border-radius: 4px;
+}
+
+.photo-tag-dot {
+  width: 8px; height: 8px; background: var(--green);
+  border-radius: 50%; animation: pulse 2s infinite; flex-shrink: 0;
+}
+
+.photo-tag-text {
+  font-family: 'IBM Plex Mono', monospace; font-size: 11px;
+  color: var(--ink2); letter-spacing: 0.06em;
+}
+
+.photo-tag-text strong {
+  color: var(--ink); display: block; font-size: 12px;
+}
+
+/* fixed anchor point at top center */
+.badge-anchor {
+  position: absolute;
+  top: 0; left: 50%;
+  transform: translateX(-50%);
+  width: 2px;
+  z-index: 1;
+}
+
+/* "Hire Me!" text label - vertical, above everything */
+.hire-label {
+  position: absolute;
+  top: 32px; left: 50%;
+  transform: translateX(-50%);
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 12px; font-weight: 600;
+  color: var(--indigo);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  z-index: 20;
+  pointer-events: none;
+  user-select: none;
+}
+
+/* canvas for string */
+#stringCanvas {
+  position: absolute;
+  inset: 0;
+  width: 100%; height: 100%;
+  pointer-events: none;
+  z-index: 5;
+}
+
+/* badge wrapper needs perspective for 3D flip */
+.badge-wrapper {
+  position: absolute;
+  left: 50%; top: 55%;
+  transform: translate(-50%, -50%);
+  z-index: 10;
+  cursor: grab;
+  user-select: none;
+  perspective: 900px;
+  transform-style: preserve-3d;
+}
+
+.badge-wrapper:active { cursor: grabbing; }
+
+/* the card */
+.id-badge {
+  width: 280px;
+  border-radius: 16px;
+  box-shadow: var(--shadow-lg);
+  position: relative;
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+
+/* both faces */
+.badge-face {
+  width: 100%;
+  border-radius: 16px;
+  overflow: hidden;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+.badge-front {
+  background: var(--white);
+  border: 1px solid var(--border);
+}
+
+.badge-back {
+  background: var(--indigo);
+  position: absolute;
+  inset: 0;
+  transform: rotateY(180deg);
+  display: flex; align-items: center; justify-content: center;
+}
+
+.badge-back-content {
+  text-align: center; padding: 32px 24px;
+  display: flex; flex-direction: column; align-items: center; gap: 8px;
+}
+
+.badge-back-logo {
+  width: 56px; height: 56px; border-radius: 50%;
+  background: rgba(255,255,255,0.15);
+  border: 2px solid rgba(255,255,255,0.3);
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Sentient', serif; font-size: 20px; font-weight: 700;
+  color: #fff; margin-bottom: 12px;
+}
+
+.badge-back-name {
+  font-family: 'Sentient', serif; font-size: 18px; font-weight: 700;
+  color: #fff; letter-spacing: -0.01em;
+}
+
+.badge-back-detail {
+  font-family: 'IBM Plex Mono', monospace; font-size: 10px;
+  color: rgba(255,255,255,0.6); letter-spacing: 0.04em;
+}
+
+.badge-back-divider {
+  width: 40px; height: 1px;
+  background: rgba(255,255,255,0.25); margin: 8px 0;
+}
+
+.badge-qr {
+  background: var(--white);
+  border-radius: 8px;
+  padding: 12px;
+  margin: 8px 0;
+  color: var(--indigo);
+}
+
+.badge-qr svg { display: block; }
+
+.badge-back-tag {
+  font-family: 'IBM Plex Mono', monospace; font-size: 10px;
+  color: rgba(255,255,255,0.7); letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+/* holographic shine overlay */
+.badge-shine {
+  position: absolute; inset: 0;
+  border-radius: 16px;
+  pointer-events: none;
+  background: radial-gradient(ellipse at 50% 30%, rgba(255,255,255,0.25) 0%, transparent 65%);
+  z-index: 3;
+  transition: background 0.05s;
+}
+
+/* big photo - takes most of card */
+.badge-photo {
+  width: 100%; height: 320px;
+  overflow: hidden; position: relative;
+  background: var(--indigo-light);
+  display: flex; align-items: center; justify-content: center;
+}
+
+.badge-photo img {
+  width: 100%; height: 100%;
+  object-fit: cover; object-position: center top; display: block;
+}
+
+.badge-photo-placeholder {
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center; gap: 10px;
+  width: 100%; height: 100%;
+}
+
+.badge-photo-placeholder svg { opacity: 0.35; }
+
+.badge-photo-placeholder span {
+  font-family: 'IBM Plex Mono', monospace; font-size: 10px;
+  color: var(--ink3); letter-spacing: 0.08em;
+  text-transform: uppercase; text-align: center; line-height: 1.6;
+}
+
+/* gradient from photo to info */
+.badge-photo::after {
+  content: '';
+  position: absolute; bottom: 0; left: 0; right: 0; height: 60px;
+  background: linear-gradient(to bottom, transparent, var(--white));
+}
+
+/* info strip */
+.badge-info {
+  padding: 14px 20px 20px;
+  text-align: center;
+  background: var(--white);
+}
+
+.badge-name {
+  font-family: 'Sentient', serif; font-size: 20px; font-weight: 700;
+  color: var(--ink); letter-spacing: -0.01em; margin-bottom: 4px;
+}
+
+.badge-title {
+  font-family: 'IBM Plex Mono', monospace; font-size: 10px;
+  color: var(--indigo); letter-spacing: 0.1em;
+  text-transform: uppercase; margin-bottom: 6px;
+}
+
+.badge-tagline {
+  font-family: 'Sentient', serif; font-size: 13px;
+  color: var(--ink3); font-style: italic;
+}
+
+/* metal ring */
+.badge-ring {
+  width: 24px; height: 24px;
+  border: 3px solid var(--border2);
+  border-radius: 50%;
+  margin: 0 auto -5px;
+  position: relative; z-index: 2;
+  background: var(--bg2);
+  box-shadow: inset 0 1px 3px rgba(0,0,0,0.2), 0 1px 4px rgba(0,0,0,0.1);
+}
+
+/* ===================== PROOF BAR ===================== */
+#proof {
+  background: var(--ink);
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+
+.proof-inner {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+}
+
+.proof-item {
+  padding: 40px;
+  border-right: 1px solid rgba(255,255,255,0.07);
+  display: flex; gap: 20px; align-items: flex-start;
+  transition: background 0.2s;
+}
+
+.proof-item:last-child { border-right: none; }
+.proof-item:hover { background: rgba(255,255,255,0.03); }
+
+.proof-icon {
+  width: 44px; height: 44px; border-radius: 8px; flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'IBM Plex Mono', monospace; font-size: 13px; font-weight: 700;
+}
+
+.proof-icon.green { background: rgba(0,184,122,0.15); color: var(--green); }
+.proof-icon.indigo { background: rgba(123,147,255,0.15); color: #7b93ff; }
+.proof-icon.amber { background: rgba(245,158,11,0.15); color: var(--amber); }
+
+.proof-headline {
+  font-family: 'Sentient', serif; font-size: 20px; font-weight: 700;
+  color: #fff; line-height: 1; margin-bottom: 6px; letter-spacing: -0.01em;
+}
+
+.proof-context {
+  font-family: 'IBM Plex Mono', monospace; font-size: 11px;
+  color: rgba(255,255,255,0.4); letter-spacing: 0.04em; line-height: 1.65;
+}
+
+/* ===================== ABOUT + SKILLS ===================== */
+#about {
+  display: grid; grid-template-columns: 1fr 1.3fr;
+  min-height: 560px; border-bottom: 1px solid var(--border);
+}
+
+.about-left {
+  padding: 72px 60px; background: var(--white);
+  border-right: 1px solid var(--border);
+  display: flex; flex-direction: column; justify-content: center;
+}
+
+.section-label {
+  font-family: 'IBM Plex Mono', monospace; font-size: 10px;
+  color: var(--indigo); letter-spacing: 0.2em; text-transform: uppercase;
+  margin-bottom: 16px; display: flex; align-items: center; gap: 10px;
+}
+
+.section-label::after {
+  content: ''; flex: 1; max-width: 40px;
+  height: 1px; background: var(--indigo); opacity: 0.3;
+}
+
+h2 {
+  font-family: 'Sentient', serif;
+  font-size: clamp(24px, 2.5vw, 36px); font-weight: 700;
+  letter-spacing: -0.02em; line-height: 1.15; margin-bottom: 20px;
+}
+
+.about-left p { color: var(--ink2); font-size: 15px; line-height: 1.8; margin-bottom: 16px; }
+.about-left p strong { color: var(--ink); font-weight: 500; }
+
+.about-links { display: flex; gap: 12px; margin-top: 28px; flex-wrap: wrap; }
+
+.about-link {
+  font-family: 'IBM Plex Mono', monospace; font-size: 11px;
+  color: var(--indigo); text-decoration: none;
+  letter-spacing: 0.06em; text-transform: uppercase;
+  padding-bottom: 2px; border-bottom: 1px solid var(--indigo-mid);
+  transition: border-color 0.2s;
+}
+
+.about-link:hover { border-color: var(--indigo); }
+
+.about-right {
+  padding: 72px 60px; background: var(--bg);
+  display: flex; flex-direction: column; justify-content: center;
+}
+
+.skill-groups { display: flex; flex-direction: column; gap: 20px; }
+
+.skill-group-label {
+  font-family: 'IBM Plex Mono', monospace; font-size: 10px;
+  color: var(--ink3); letter-spacing: 0.15em;
+  text-transform: uppercase; margin-bottom: 8px;
+}
+
+.chips { display: flex; flex-wrap: wrap; gap: 7px; }
+
+.chip {
+  font-family: 'IBM Plex Mono', monospace; font-size: 11px;
+  padding: 5px 12px; border-radius: 100px;
+  border: 1px solid var(--border2); background: var(--white); color: var(--ink2);
+  letter-spacing: 0.02em; transition: all 0.15s; cursor: default;
+}
+
+.chip:hover { background: var(--indigo); color: #fff; border-color: var(--indigo); }
+.chip.core { background: var(--indigo-light); border-color: var(--indigo-mid); color: var(--indigo); font-weight: 500; }
+
+/* ===================== PROJECTS ===================== */
+#projects {
+  padding: 80px; background: var(--white); border-bottom: 1px solid var(--border);
+}
+
+.section-header { margin-bottom: 48px; }
+
+.section-header p {
+  color: var(--ink3); font-size: 14px; margin-top: 8px;
+  font-family: 'IBM Plex Mono', monospace; letter-spacing: 0.02em;
+}
+
+.projects-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;
+}
+
+.proj-card {
+  background: var(--bg); border: 1px solid var(--border);
+  border-radius: 4px; display: flex; flex-direction: column;
+  overflow: hidden; transition: all 0.25s; position: relative;
+}
+
+.proj-card:hover {
+  border-color: var(--indigo-mid); transform: translateY(-4px);
+  box-shadow: var(--shadow-lg); background: var(--white);
+}
+
+.proj-card-top { height: 4px; width: 100%; }
+.proj-card-body { padding: 28px; flex: 1; display: flex; flex-direction: column; }
+
+.proj-card-meta {
+  display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px;
+}
+
+.proj-card-num {
+  font-family: 'IBM Plex Mono', monospace; font-size: 10px; color: var(--ink3); letter-spacing: 0.1em;
+}
+
+.proj-card-badge {
+  font-family: 'IBM Plex Mono', monospace; font-size: 9px;
+  padding: 3px 8px; border-radius: 100px;
+  letter-spacing: 0.06em; border: 1px solid; white-space: nowrap;
+}
+
+.proj-card-title {
+  font-family: 'Sentient', serif; font-size: 20px;
+  font-weight: 700; letter-spacing: -0.01em; margin-bottom: 4px; color: var(--ink);
+}
+
+.proj-card-tagline {
+  font-family: 'IBM Plex Mono', monospace; font-size: 11px;
+  letter-spacing: 0.03em; margin-bottom: 14px;
+}
+
+.proj-card-desc {
+  font-size: 13px; color: var(--ink2); line-height: 1.75; margin-bottom: 16px; flex: 1;
+}
+
+.proj-mini-metrics {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 16px;
+}
+
+.mini-m {
+  background: var(--white); border: 1px solid var(--border); border-radius: 3px; padding: 10px 12px;
+}
+
+.mini-m-label {
+  font-family: 'IBM Plex Mono', monospace; font-size: 9px;
+  color: var(--ink3); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 3px;
+}
+
+.mini-m-val {
+  font-family: 'Sentient', serif; font-size: 18px; font-weight: 700; letter-spacing: -0.01em;
+}
+
+.proj-stack { display: flex; flex-wrap: wrap; gap: 5px; margin-bottom: 20px; }
+
+.stack-tag {
+  font-family: 'IBM Plex Mono', monospace; font-size: 10px;
+  padding: 3px 8px; border-radius: 100px;
+  border: 1px solid var(--border); color: var(--ink3); background: var(--white);
+}
+
+.proj-card-link {
+  font-family: 'IBM Plex Mono', monospace; font-size: 11px;
+  letter-spacing: 0.08em; text-transform: uppercase;
+  text-decoration: none; display: inline-flex;
+  align-items: center; gap: 6px; transition: gap 0.2s;
+  margin-top: auto; padding-top: 16px; border-top: 1px solid var(--border);
+}
+
+.proj-card-link:hover { gap: 10px; }
+
+/* ===================== EXPERIENCE ===================== */
+#experience {
+  background: var(--bg2); padding: 80px; border-bottom: 1px solid var(--border);
+}
+
+/* HORIZONTAL TABS - company names across the top */
+.exp-tabs-row {
+  display: flex; gap: 0;
+  border-bottom: 2px solid var(--border);
+  margin-top: 48px; margin-bottom: 48px;
+  overflow-x: auto;
+}
+
+.exp-tab {
+  padding: 20px 32px; cursor: pointer;
+  border: none; background: transparent;
+  border-bottom: 3px solid transparent;
+  margin-bottom: -2px;
+  text-align: left; transition: all 0.2s;
+  font-family: 'DM Sans', sans-serif;
+  white-space: nowrap;
+  display: flex; flex-direction: column; gap: 4px;
+}
+
+.exp-tab:hover { background: rgba(61,82,213,0.04); }
+
+.exp-tab.active {
+  border-bottom-color: var(--indigo);
+  background: var(--white);
+}
+
+.exp-tab-co {
+  font-family: 'Sentient', serif; font-size: 17px;
+  font-weight: 700; color: var(--ink);
+}
+
+.exp-tab.active .exp-tab-co { color: var(--indigo); }
+
+.exp-tab-yr {
+  font-family: 'IBM Plex Mono', monospace; font-size: 10px;
+  color: var(--ink3); letter-spacing: 0.06em;
+}
+
+/* PANEL CONTENT */
+.exp-panel { display: none; }
+.exp-panel.active { display: block; }
+
+.exp-panel-header {
+  display: flex; justify-content: space-between;
+  align-items: flex-start; margin-bottom: 32px;
+  flex-wrap: wrap; gap: 16px;
+}
+
+.exp-role {
+  font-family: 'Sentient', serif; font-size: 28px;
+  font-weight: 700; letter-spacing: -0.02em; margin-bottom: 6px;
+}
+
+.exp-co-label {
+  font-family: 'IBM Plex Mono', monospace; font-size: 12px;
+  color: var(--indigo); letter-spacing: 0.04em;
+}
+
+.exp-location-tag {
+  font-family: 'IBM Plex Mono', monospace; font-size: 11px;
+  color: var(--ink3); background: var(--white);
+  border: 1px solid var(--border); padding: 6px 14px;
+  border-radius: 100px; letter-spacing: 0.06em;
+  align-self: flex-start;
+}
+
+.exp-items { display: flex; flex-direction: column; gap: 12px; }
+
+.exp-item {
+  display: flex; gap: 20px; align-items: flex-start;
+  padding: 18px 24px; background: var(--white);
+  border: 1px solid var(--border); border-left: 3px solid var(--indigo-mid);
+  border-radius: 0 4px 4px 0; font-size: 14px; color: var(--ink2); line-height: 1.65;
+  transition: border-left-color 0.2s;
+}
+
+.exp-item:hover { border-left-color: var(--indigo); }
+
+.exp-metric {
+  font-family: 'Sentient', serif; font-weight: 700;
+  color: var(--indigo); font-size: 18px;
+  min-width: 60px; text-align: center; flex-shrink: 0; padding-top: 1px;
+}
+
+/* ===================== ENTRANCE ANIMATIONS ===================== */
+.slide-left {
+  opacity: 0; transform: translateX(-40px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+.slide-right {
+  opacity: 0; transform: translateX(40px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+.slide-up {
+  opacity: 0; transform: translateY(30px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+.slide-left.visible, .slide-right.visible, .slide-up.visible {
+  opacity: 1; transform: none;
+}
+
+/* ===================== TIMELINE ===================== */
+#experience {
+  background: var(--bg2); padding: 80px;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+
+.timeline {
+  position: relative;
+  margin-top: 56px;
+  padding-bottom: 20px;
+}
+
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 50%; top: 0; bottom: 0;
+  width: 2px;
+  background: linear-gradient(to bottom, var(--indigo), var(--indigo-mid), var(--border));
+  transform: translateX(-50%);
+  z-index: 0;
+}
+
+/* each row is a flex container, dot in middle, card on one side */
+.tl-item {
+  position: relative;
+  width: 100%;
+  margin-bottom: 40px;
+  display: flex;
+  align-items: flex-start;
+}
+
+/* dot pinned to center line of the row */
+.tl-dot {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 14px; height: 14px;
+  background: var(--indigo);
+  border: 3px solid var(--white);
+  border-radius: 50%;
+  top: 22px;
+  box-shadow: 0 0 0 3px var(--indigo-mid);
+  z-index: 2;
+}
+
+.tl-dot-edu {
+  background: var(--green);
+  box-shadow: 0 0 0 3px var(--green-light);
+}
+
+/* connector line from dot to card */
+.tl-item.tl-right .tl-dot::after {
+  content: '';
+  position: absolute;
+  left: 100%; top: 50%;
+  width: 24px; height: 1.5px;
+  background: var(--indigo-mid);
+  transform: translateY(-50%);
+}
+
+.tl-item.tl-left .tl-dot::after {
+  content: '';
+  position: absolute;
+  right: 100%; top: 50%;
+  width: 24px; height: 1.5px;
+  background: var(--indigo-mid);
+  transform: translateY(-50%);
+}
+
+/* RIGHT card: sits right next to center, fixed width, extra space goes to right */
+.tl-item.tl-right {
+  justify-content: flex-start;
+}
+
+.tl-item.tl-right .tl-card {
+  margin-left: calc(50% + 30px);
+  width: 360px;
+  max-width: 360px;
+}
+
+/* LEFT card: sits right next to center, fixed width, extra space goes to left */
+.tl-item.tl-left {
+  justify-content: flex-end;
+}
+
+.tl-item.tl-left .tl-card {
+  margin-right: calc(50% + 30px);
+  width: 360px;
+  max-width: 360px;
+}
+
+.tl-card {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 20px 22px;
+  box-shadow: 0 4px 16px rgba(61,82,213,0.09), 0 1px 4px rgba(61,82,213,0.05);
+  transition: box-shadow 0.25s, transform 0.25s, border-color 0.25s;
+  flex-shrink: 0;
+}
+
+.tl-card:hover {
+  box-shadow: 0 12px 36px rgba(61,82,213,0.15), 0 2px 8px rgba(61,82,213,0.07);
+  transform: translateY(-3px);
+  border-color: var(--indigo-mid);
+}
+
+.tl-type-badge {
+  font-family: 'IBM Plex Mono', monospace; font-size: 9px;
+  padding: 2px 9px; border-radius: 100px;
+  letter-spacing: 0.08em; text-transform: uppercase;
+  display: inline-block; margin-bottom: 8px;
+}
+
+.tl-work {
+  background: var(--indigo-light); color: var(--indigo);
+  border: 1px solid var(--indigo-mid);
+}
+
+.tl-edu {
+  background: var(--green-light); color: var(--green);
+  border: 1px solid rgba(0,184,122,0.3);
+}
+
+.tl-period {
+  font-family: 'IBM Plex Mono', monospace; font-size: 10px;
+  color: var(--ink3); letter-spacing: 0.06em; margin-bottom: 4px;
+}
+
+.tl-role {
+  font-family: 'Sentient', serif; font-size: 16px;
+  font-weight: 700; color: var(--ink);
+  letter-spacing: -0.01em; margin-bottom: 3px;
+}
+
+.tl-company {
+  font-size: 12px; color: var(--ink3); margin-bottom: 10px;
+}
+
+.tl-desc {
+  font-size: 13px; color: var(--ink2);
+  line-height: 1.65;
+}
+
+/* ===================== SIMPLIFIED CONTACT ===================== */
+#contact {
+  background: var(--ink);
+  padding: 100px 80px;
+}
+
+.contact-inner {
+  max-width: 800px; margin: 0 auto; text-align: center;
+}
+
+.contact-inner .section-label { justify-content: center; color: rgba(255,255,255,0.4); }
+.contact-inner .section-label::after { background: rgba(255,255,255,0.2); }
+
+.contact-inner h2 {
+  color: #fff; margin-bottom: 16px;
+  font-size: clamp(28px, 3vw, 44px);
+}
+
+.contact-desc {
+  color: rgba(255,255,255,0.5); font-size: 16px;
+  line-height: 1.75; margin-bottom: 48px; max-width: 560px;
+  margin-left: auto; margin-right: auto;
+}
+
+.contact-links-row {
+  display: flex; flex-wrap: wrap; gap: 12px;
+  justify-content: center;
+}
+
+.contact-link-pill {
+  display: flex; flex-direction: column; align-items: center; gap: 4px;
+  padding: 16px 24px;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 4px;
+  text-decoration: none; color: #fff;
+  font-size: 14px; transition: all 0.2s;
+  min-width: 160px;
+}
+
+.contact-link-pill:hover {
+  background: rgba(61,82,213,0.3);
+  border-color: rgba(61,82,213,0.6);
+  transform: translateY(-2px);
+}
+
+.contact-link-label {
+  font-family: 'IBM Plex Mono', monospace; font-size: 9px;
+  color: rgba(255,255,255,0.35); letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.contact-left { padding: 80px; border-right: 1px solid var(--border); }
+.contact-left h2 { margin-bottom: 16px; }
+.contact-left p { color: var(--ink2); font-size: 15px; line-height: 1.8; margin-bottom: 36px; max-width: 400px; }
+
+.contact-items { display: flex; flex-direction: column; gap: 2px; }
+
+.contact-item {
+  display: flex; align-items: center; gap: 18px;
+  padding: 16px 20px; border: 1px solid var(--border);
+  background: var(--bg); text-decoration: none; color: var(--ink);
+  font-size: 14px; transition: all 0.2s; border-radius: 3px;
+}
+
+.contact-item:hover { background: var(--indigo-light); border-color: var(--indigo-mid); color: var(--indigo); }
+
+.contact-type {
+  font-family: 'IBM Plex Mono', monospace; font-size: 10px;
+  color: var(--ink3); letter-spacing: 0.1em; text-transform: uppercase; min-width: 60px;
+}
+
+.contact-right { padding: 80px; background: var(--ink); color: #fff; }
+
+.contact-right h3 {
+  font-family: 'Sentient', serif; font-size: 22px;
+  font-weight: 700; margin-bottom: 8px; letter-spacing: -0.015em;
+}
+
+.contact-right p { color: rgba(255,255,255,0.4); font-size: 13px; margin-bottom: 32px; line-height: 1.7; }
+
+.avail-rows { display: flex; flex-direction: column; }
+
+.avail-row {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 15px 0; border-bottom: 1px solid rgba(255,255,255,0.07); font-size: 14px;
+}
+
+.avail-row:last-child { border-bottom: none; }
+.avail-label { color: rgba(255,255,255,0.45); font-size: 13px; }
+
+.avail-tag {
+  font-family: 'IBM Plex Mono', monospace; font-size: 10px;
+  padding: 4px 12px; border-radius: 100px; letter-spacing: 0.06em;
+}
+
+.avail-open { background: rgba(0,184,122,0.15); color: var(--green); border: 1px solid rgba(0,184,122,0.3); }
+.avail-soon { background: rgba(245,158,11,0.12); color: var(--amber); border: 1px solid rgba(245,158,11,0.3); }
+
+footer {
+  background: var(--ink); padding: 24px 80px;
+  border-top: 1px solid rgba(255,255,255,0.06);
+  display: flex; justify-content: space-between; align-items: center;
+}
+
+.footer-l, .footer-r {
+  font-family: 'IBM Plex Mono', monospace; font-size: 11px;
+  color: rgba(255,255,255,0.22); letter-spacing: 0.06em;
+}
+
+.footer-l span, .footer-r span { color: rgba(255,255,255,0.45); }
+
+@keyframes fadeUp { from{opacity:0;transform:translateY(18px)} to{opacity:1;transform:translateY(0)} }
+.reveal { opacity:0; transform:translateY(24px); transition:opacity 0.6s ease,transform 0.6s ease; }
+.reveal.visible { opacity:1; transform:none; }
+
+@media (max-width: 1100px) {
+  .projects-grid { grid-template-columns: 1fr 1fr; }
+}
+
+@media (max-width: 960px) {
+  nav { padding: 0 24px; }
+  .nav-links { gap: 16px; }
+  #hero { grid-template-columns: 1fr; }
+  .hero-left { padding: 60px 24px; }
+  .hero-right { padding: 40px 24px 60px; justify-content: flex-start; }
+  .photo-frame { width: 100%; max-width: 300px; height: 340px; }
+  .proof-inner { grid-template-columns: 1fr; }
+  .proof-item { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.07); }
+  #about { grid-template-columns: 1fr; }
+  .about-left, .about-right { padding: 48px 24px; }
+  #projects { padding: 60px 24px; }
+  .projects-grid { grid-template-columns: 1fr; }
+  #experience { padding: 60px 24px; }
+  #contact { grid-template-columns: 1fr; }
+  .contact-left, .contact-right { padding: 60px 24px; }
+  footer { padding: 20px 24px; flex-direction: column; gap: 8px; text-align: center; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#hero" class="nav-brand">
+    <div class="nav-avatar">
+      <img src="photo.jpg" alt="PK" onerror="this.style.display='none'">
+      PK
+    </div>
+    <span class="nav-name">Priyanka Kanojia</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#contact">Contact</a></li>
+    <!-- RESUME LINK IN NAV -->
+    <li>
+      <a href="Priyanka_Kanojia_Resume.pdf" target="_blank" class="nav-resume">Resume</a>
+    </li>
+    <li><a href="#contact" class="nav-hire">Hire Me</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-left">
+    <div class="hero-status">
+      <div class="status-dot"></div>
+      Open to Co-op · Fall 2026
+    </div>
+
+    <h1>I build the <span class="accent">data layer</span> that makes businesses smarter.</h1>
+
+    <p class="hero-sub">
+      7 years of production data experience across 4 industries. Now at Northeastern sharpening the ML edge.
+      <strong>I build pipelines that scale, dashboards that drive decisions, and models that ship.</strong>
+    </p>
+
+    <div class="hero-lanes">
+      <span class="lane lane-de">Data Engineering</span>
+      <span class="lane lane-bi">Business Intelligence</span>
+      <span class="lane lane-ml">Machine Learning</span>
+      <span class="lane lane-bc">Product Analytics</span>
+    </div>
+
+    <div class="hero-ctas">
+      <a href="#projects" class="btn btn-primary">See My Work</a>
+      <a href="#contact" class="btn btn-ghost">Get in Touch</a>
+      <a href="Priyanka_Kanojia_Resume.pdf" target="_blank" class="btn btn-resume">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+          <polyline points="7 10 12 15 17 10"/>
+          <line x1="12" y1="15" x2="12" y2="3"/>
+        </svg>
+        Resume
+      </a>
+    </div>
+  </div>
+
+  <div class="hero-right">
+    <div class="photo-frame">
+      <div class="photo-wrapper">
+        <img src="photo.jpg" alt="Priyanka Kanojia"
+          onerror="this.parentElement.innerHTML='<div class=\'photo-placeholder\'><svg width=\'48\' height=\'48\' viewBox=\'0 0 24 24\' fill=\'none\' stroke=\'%233d52d5\' stroke-width=\'1.5\'><path d=\'M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2\'/><circle cx=\'12\' cy=\'7\' r=\'4\'/></svg><p>Add photo.jpg to your folder</p></div>'">
+      </div>
+      <div class="photo-tag">
+        <div class="photo-tag-dot"></div>
+        <div class="photo-tag-text">
+          <strong>Available Fall 2026</strong>
+          Boston, MA · Remote
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROOF BAR -->
+<section id="proof">
+  <div class="proof-inner">
+    <div class="proof-item reveal">
+      <div class="proof-icon green">60%</div>
+      <div class="proof-text">
+        <div class="proof-headline">ETL Efficiency</div>
+        <div class="proof-context">Cut data preprocessing time by 60% at InfowanHR by consolidating 5+ data sources into a single automated pipeline serving 10K+ accounts.</div>
+      </div>
+    </div>
+    <div class="proof-item reveal">
+      <div class="proof-icon indigo">40%</div>
+      <div class="proof-text">
+        <div class="proof-headline">Revenue Impact</div>
+        <div class="proof-context">Drove 40% revenue growth at InfowanHR validated by A/B testing, using SQL segmentation models and 12+ executive Tableau dashboards.</div>
+      </div>
+    </div>
+    <div class="proof-item reveal">
+      <div class="proof-icon amber">7+</div>
+      <div class="proof-text">
+        <div class="proof-headline">Years in Production</div>
+        <div class="proof-context">7 years shipping production data systems across IoT, SaaS, edtech, and fintech. Real pipelines, real stakes, real decisions.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT + SKILLS -->
+<section id="about">
+  <div class="about-left reveal">
+    <div class="section-label">About</div>
+    <h2>Engineer by training. Analyst by instinct.</h2>
+    <p>I started by shipping iOS apps in service-based and product-based organizations. But the question that kept pulling me back was always about data: <strong>why do users behave this way, and what will they do next?</strong></p>
+    <p>That question drove 7 years across IoT, SaaS, edtech, and fintech, building SQL pipelines, automating reporting for C-suites, and building the full stack of data work, from ingestion to insight.</p>
+    <p>At Northeastern I am going deeper on the engineering and ML side, while keeping the business instinct that makes data work actually land.</p>
+    <div class="about-links">
+      <a href="https://linkedin.com/in/priyanka-datascience" target="_blank" class="about-link">LinkedIn &rarr;</a>
+      <a href="https://github.com/priyankakanojia36" target="_blank" class="about-link">GitHub &rarr;</a>
+      <a href="mailto:kanojia.p@northeastern.edu" class="about-link">Email &rarr;</a>
+    </div>
+  </div>
+  <div class="about-right reveal">
+    <div class="section-label">Tech Stack</div>
+    <h2 style="font-size:22px;margin-bottom:28px;">What I build with.</h2>
+    <div class="skill-groups">
+      <div>
+        <div class="skill-group-label">Languages & Query</div>
+        <div class="chips">
+          <span class="chip core">Python</span>
+          <span class="chip core">SQL</span>
+          <span class="chip core">PySpark</span>
+          <span class="chip">R</span>
+          <span class="chip">Java</span>
+          <span class="chip">Swift</span>
+        </div>
+      </div>
+      <div>
+        <div class="skill-group-label">Data Engineering & Cloud</div>
+        <div class="chips">
+          <span class="chip core">Apache Airflow</span>
+          <span class="chip core">Apache Spark</span>
+          <span class="chip core">Apache Kafka</span>
+          <span class="chip core">ETL / ELT</span>
+          <span class="chip core">AWS S3</span>
+          <span class="chip">EC2</span>
+          <span class="chip">Lambda</span>
+          <span class="chip">Redshift</span>
+          <span class="chip">Kinesis</span>
+          <span class="chip">Snowflake</span>
+          <span class="chip">BigQuery</span>
+          <span class="chip">Databricks</span>
+          <span class="chip">Docker</span>
+          <span class="chip">CI/CD</span>
+          <span class="chip">Linux/Bash</span>
+        </div>
+      </div>
+      <div>
+        <div class="skill-group-label">Databases & Storage</div>
+        <div class="chips">
+          <span class="chip core">PostgreSQL</span>
+          <span class="chip core">DynamoDB</span>
+          <span class="chip">MySQL</span>
+          <span class="chip">SQL Server</span>
+          <span class="chip">MongoDB</span>
+          <span class="chip">Redis</span>
+          <span class="chip">SQLite</span>
+        </div>
+      </div>
+      <div>
+        <div class="skill-group-label">BI, Visualization & ML</div>
+        <div class="chips">
+          <span class="chip core">Tableau</span>
+          <span class="chip core">Power BI</span>
+          <span class="chip">Streamlit</span>
+          <span class="chip">Matplotlib</span>
+          <span class="chip">Seaborn</span>
+          <span class="chip">Scikit-learn</span>
+          <span class="chip">XGBoost</span>
+          <span class="chip">MLflow</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="section-header reveal">
+    <div class="section-label">Projects</div>
+    <h2>Things I have built.</h2>
+
+  </div>
+  <div class="projects-grid">
+
+    <!-- 01 CascadeWatch -->
+    <div class="proj-card reveal">
+      <div class="proj-card-top" style="background:var(--green)"></div>
+      <div class="proj-card-body">
+        <div class="proj-card-meta">
+          <span class="proj-card-num">01</span>
+          <span class="proj-card-badge" style="background:var(--green-light);color:var(--green);border-color:rgba(0,184,122,0.3)">ML Pipeline</span>
+        </div>
+        <div class="proj-card-title">CascadeWatch</div>
+        <div class="proj-card-tagline" style="color:var(--green)">Large-Scale DeFi Risk Prediction Pipeline</div>
+        <p class="proj-card-desc">End-to-end ML data pipeline ingesting 121K+ hourly records from 5 DeFi APIs across BTC, ETH, and SOL. A 5-model ensemble scores liquidation cascade risk in real time on AWS, giving traders a 3.8-hour average warning before a cascade event.</p>
+        <div class="proj-mini-metrics">
+          <div class="mini-m">
+            <div class="mini-m-label">AUC-ROC</div>
+            <div class="mini-m-val" style="color:var(--green)">0.7229</div>
+          </div>
+          <div class="mini-m">
+            <div class="mini-m-label">Lead Time</div>
+            <div class="mini-m-val" style="color:var(--green)">3.8h</div>
+          </div>
+        </div>
+        <div class="proj-stack">
+          <span class="stack-tag">Python</span><span class="stack-tag">XGBoost</span>
+          <span class="stack-tag">Airflow</span><span class="stack-tag">AWS</span>
+          <span class="stack-tag">Streamlit</span><span class="stack-tag">dYdX API</span>
+        </div>
+        <a href="https://github.com/priyankakanojia36/Liquidation-Cascade-Predictor" target="_blank" class="proj-card-link" style="color:var(--green)">GitHub &rarr;</a>
+      </div>
+    </div>
+
+    <!-- 02 Steam Dashboard -->
+    <div class="proj-card reveal">
+      <div class="proj-card-top" style="background:var(--indigo)"></div>
+      <div class="proj-card-body">
+        <div class="proj-card-meta">
+          <span class="proj-card-num">02</span>
+          <span class="proj-card-badge" style="background:var(--indigo-light);color:var(--indigo);border-color:var(--indigo-mid)">BI & Analytics</span>
+        </div>
+        <div class="proj-card-title">Steam Analytics Dashboard</div>
+        <div class="proj-card-tagline" style="color:var(--indigo)">Interactive Tableau Dashboard · 95K+ Games</div>
+        <p class="proj-card-desc">Analyzed 95K+ Steam games to surface pricing trends, genre distribution, player engagement patterns, and market insights. Built with Python for data wrangling, SQL for querying, and Tableau for the interactive dashboard.</p>
+        <div class="proj-mini-metrics">
+          <div class="mini-m">
+            <div class="mini-m-label">Games Analyzed</div>
+            <div class="mini-m-val" style="color:var(--indigo)">95K+</div>
+          </div>
+          <div class="mini-m">
+            <div class="mini-m-label">Tool</div>
+            <div class="mini-m-val" style="font-size:14px;color:var(--indigo)">Tableau</div>
+          </div>
+        </div>
+        <div class="proj-stack">
+          <span class="stack-tag">Tableau</span><span class="stack-tag">Python</span>
+          <span class="stack-tag">SQL</span><span class="stack-tag">Jupyter</span>
+        </div>
+        <a href="https://github.com/priyankakanojia36/steam-games-analytics-dashboard" target="_blank" class="proj-card-link" style="color:var(--indigo)">GitHub &rarr;</a>
+      </div>
+    </div>
+
+    <!-- 03 Churn -->
+    <div class="proj-card reveal">
+      <div class="proj-card-top" style="background:#2563eb"></div>
+      <div class="proj-card-body">
+        <div class="proj-card-meta">
+          <span class="proj-card-num">03</span>
+          <span class="proj-card-badge" style="background:#eff6ff;color:#2563eb;border-color:#bfdbfe">ML · Classification</span>
+        </div>
+        <div class="proj-card-title">Churn Prediction</div>
+        <div class="proj-card-tagline" style="color:#2563eb">End-to-End Retention Modeling Pipeline</div>
+        <p class="proj-card-desc">Full classification pipeline on 7,043 telecom customer records using Logistic Regression and Random Forest with SMOTE oversampling. Identifies top 5 churn drivers, estimated to reduce churn by 15-20%.</p>
+        <div class="proj-mini-metrics">
+          <div class="mini-m">
+            <div class="mini-m-label">AUC-ROC</div>
+            <div class="mini-m-val" style="color:#2563eb">0.842</div>
+          </div>
+          <div class="mini-m">
+            <div class="mini-m-label">Accuracy</div>
+            <div class="mini-m-val" style="color:#2563eb">80.7%</div>
+          </div>
+        </div>
+        <div class="proj-stack">
+          <span class="stack-tag">Python</span><span class="stack-tag">Scikit-learn</span>
+          <span class="stack-tag">SMOTE</span><span class="stack-tag">Random Forest</span>
+        </div>
+        <a href="https://github.com/priyankakanojia36/customer-churn-prediction" target="_blank" class="proj-card-link" style="color:#2563eb">GitHub &rarr;</a>
+      </div>
+    </div>
+
+    <!-- 04 Brain Signal -->
+    <div class="proj-card reveal">
+      <div class="proj-card-top" style="background:var(--amber)"></div>
+      <div class="proj-card-body">
+        <div class="proj-card-meta">
+          <span class="proj-card-num">04</span>
+          <span class="proj-card-badge" style="background:#fef9ec;color:var(--amber);border-color:rgba(245,158,11,0.3)">3rd Place · Hackathon</span>
+        </div>
+        <div class="proj-card-title">Brain Signal Pipeline</div>
+        <div class="proj-card-tagline" style="color:var(--amber)">Real-Time Neural Array Processing</div>
+        <p class="proj-card-desc">3rd place at Precision Neuroscience BrainStorm Hackathon at Microsoft NERD Center. Real-time WebSocket pipeline processing 1,024-channel neural array data at sub-100ms latency with FFT spectral analysis and 40% noise reduction.</p>
+        <div class="proj-mini-metrics">
+          <div class="mini-m">
+            <div class="mini-m-label">Latency</div>
+            <div class="mini-m-val" style="color:var(--amber)">&lt;100ms</div>
+          </div>
+          <div class="mini-m">
+            <div class="mini-m-label">Channels</div>
+            <div class="mini-m-val" style="color:var(--amber)">1,024</div>
+          </div>
+        </div>
+        <div class="proj-stack">
+          <span class="stack-tag">Python</span><span class="stack-tag">WebSocket</span>
+          <span class="stack-tag">NumPy</span><span class="stack-tag">FFT</span>
+        </div>
+        <a href="https://github.com/priyankakanojia36/brainstorm-hackathon" target="_blank" class="proj-card-link" style="color:var(--amber)">GitHub &rarr;</a>
+      </div>
+    </div>
+
+    <!-- 05 Proof of Purpose -->
+    <div class="proj-card reveal">
+      <div class="proj-card-top" style="background:var(--red)"></div>
+      <div class="proj-card-body">
+        <div class="proj-card-meta">
+          <span class="proj-card-num">05</span>
+          <span class="proj-card-badge" style="background:#fff1f3;color:var(--red);border-color:rgba(244,63,94,0.3)">MIT Hackathon 2026</span>
+        </div>
+        <div class="proj-card-title">Proof-of-Purpose</div>
+        <div class="proj-card-tagline" style="color:var(--red)">AI Accountability on Bitcoin</div>
+        <p class="proj-card-desc">Built at MIT Bitcoin Hackathon 2026. Tests AI models against machine-readable ethical constitutions, SHA-256 hashes each response, and anchors the proof on Bitcoin mainnet via OpenTimestamps. A tamper-proof audit trail for AI behavior.</p>
+        <div class="proj-mini-metrics">
+          <div class="mini-m">
+            <div class="mini-m-label">Proof Method</div>
+            <div class="mini-m-val" style="font-size:13px;color:var(--red)">SHA-256</div>
+          </div>
+          <div class="mini-m">
+            <div class="mini-m-label">Anchored On</div>
+            <div class="mini-m-val" style="font-size:13px;color:var(--ink2)">Bitcoin</div>
+          </div>
+        </div>
+        <div class="proj-stack">
+          <span class="stack-tag">TypeScript</span><span class="stack-tag">React</span>
+          <span class="stack-tag">OpenTimestamps</span><span class="stack-tag">Anthropic SDK</span>
+        </div>
+        <a href="https://github.com/priyankakanojia36/proof-of-purpose" target="_blank" class="proj-card-link" style="color:var(--red)">GitHub &rarr;</a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- EXPERIENCE TIMELINE -->
+<section id="experience">
+  <div class="section-label reveal">Production Experience</div>
+  <h2 class="reveal">Where I have worked.</h2>
+
+  <div class="timeline reveal">
+
+    <!-- Education: MS - LATEST FIRST -->
+    <div class="tl-item tl-left slide-left">
+      <div class="tl-dot tl-dot-edu"></div>
+      <div class="tl-card">
+        <div class="tl-type-badge tl-edu">Education · Current</div>
+        <div class="tl-period">Aug 2025 – Expected Jun 2027</div>
+        <div class="tl-role">MS in Analytics, Applied ML & Statistics</div>
+        <div class="tl-company">Northeastern University · Boston · GPA 3.5</div>
+        <div class="tl-desc">Concentrating in statistical modeling and machine learning. Building production ML systems, DeFi pipelines, and AI accountability tools.</div>
+      </div>
+    </div>
+
+    <!-- Job: InfowanHR -->
+    <div class="tl-item tl-right slide-right">
+      <div class="tl-dot"></div>
+      <div class="tl-card">
+        <div class="tl-type-badge tl-work">Experience</div>
+        <div class="tl-period">Jun 2023 – Aug 2025</div>
+        <div class="tl-role">Product Manager, Data & Analytics</div>
+        <div class="tl-company">InfowanHR · Mumbai</div>
+        <div class="tl-desc">Reduced data preprocessing time by 60% via automated ETL pipelines. Drove 40% revenue growth through SQL segmentation models and 12+ Tableau dashboards.</div>
+      </div>
+    </div>
+
+    <!-- Job: Unacademy -->
+    <div class="tl-item tl-left slide-left">
+      <div class="tl-dot"></div>
+      <div class="tl-card">
+        <div class="tl-type-badge tl-work">Experience</div>
+        <div class="tl-period">Feb 2021 – May 2023</div>
+        <div class="tl-role">Senior Business Analyst</div>
+        <div class="tl-company">Unacademy · Bangalore</div>
+        <div class="tl-desc">Built end-to-end SQL data models and Tableau dashboards serving C-suite daily reviews. Improved user engagement by 20% across 1M+ interactions.</div>
+      </div>
+    </div>
+
+    <!-- Job: Redseer -->
+    <div class="tl-item tl-right slide-right">
+      <div class="tl-dot"></div>
+      <div class="tl-card">
+        <div class="tl-type-badge tl-work">Experience</div>
+        <div class="tl-period">Feb – Dec 2020</div>
+        <div class="tl-role">Business Analyst</div>
+        <div class="tl-company">Redseer Strategy Consultants · Bangalore</div>
+        <div class="tl-desc">Built quantitative research models identifying $10M+ revenue potential. Delivered GTM strategies for 5+ enterprise clients across 4 industries.</div>
+      </div>
+    </div>
+
+    <!-- Job: iOS Developer -->
+    <div class="tl-item tl-left slide-left">
+      <div class="tl-dot"></div>
+      <div class="tl-card">
+        <div class="tl-type-badge tl-work">Experience</div>
+        <div class="tl-period">May 2017 – Dec 2019</div>
+        <div class="tl-role">Senior iOS Developer</div>
+        <div class="tl-company">Nimap Infotech / NODD / Picostone · Mumbai</div>
+        <div class="tl-desc">Shipped production iOS apps across 7 products, reduced crash rates by 40%, and established CI/CD pipelines across the engineering team.</div>
+      </div>
+    </div>
+
+    <!-- Education: BE -->
+    <div class="tl-item tl-right slide-right">
+      <div class="tl-dot tl-dot-edu"></div>
+      <div class="tl-card">
+        <div class="tl-type-badge tl-edu">Education</div>
+        <div class="tl-period">Aug 2013 – May 2017</div>
+        <div class="tl-role">Bachelor of Engineering, Information Technology</div>
+        <div class="tl-company">Shree L.R. Tiwari College of Engineering · Mumbai</div>
+        <div class="tl-desc">Foundation in software engineering, data structures, and systems design across 4 years of technical coursework.</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="contact-inner reveal">
+    <div class="section-label">Contact</div>
+    <h2>Let's build something together.</h2>
+    <p class="contact-desc">Actively looking for a co-op starting Fall 2026 in Data Engineering, BI, or Analytics. 7+ years of production experience, ready to contribute from day one.</p>
+    <div class="contact-links-row">
+      <a href="mailto:kanojia.p@northeastern.edu" class="contact-link-pill">
+        <span class="contact-link-label">Email</span>
+        kanojia.p@northeastern.edu
+      </a>
+      <a href="tel:+16176068130" class="contact-link-pill">
+        <span class="contact-link-label">Phone</span>
+        +1 (617) 606-8130
+      </a>
+      <a href="https://linkedin.com/in/priyanka-datascience" target="_blank" class="contact-link-pill">
+        <span class="contact-link-label">LinkedIn</span>
+        priyanka-datascience
+      </a>
+      <a href="https://github.com/priyankakanojia36" target="_blank" class="contact-link-pill">
+        <span class="contact-link-label">GitHub</span>
+        priyankakanojia36
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-l">Priyanka Kanojia · <span>Boston, MA</span> · 2026</div>
+  <div class="footer-r">MS Analytics · Northeastern · <span>GPA 3.5</span></div>
+</footer>
+
+<script>
+// SCROLL REVEAL - handles reveal, slide-left, slide-right, slide-up
+document.querySelectorAll('.reveal, .slide-left, .slide-right, .slide-up').forEach(el => {
+  new IntersectionObserver(entries => {
+    if (entries[0].isIntersecting) { el.classList.add('visible'); }
+  }, { threshold: 0.08 }).observe(el);
+});
+
+// HERO ENTRANCE - staggered slide in on page load
+(function() {
+  const heroLeft = document.querySelector('.hero-left');
+  const heroRight = document.querySelector('.hero-right');
+  if (heroLeft) { heroLeft.style.opacity = '0'; heroLeft.style.transform = 'translateX(-40px)'; }
+  if (heroRight) { heroRight.style.opacity = '0'; heroRight.style.transform = 'translateX(40px)'; }
+  window.addEventListener('load', () => {
+    setTimeout(() => {
+      if (heroLeft) { heroLeft.style.transition = 'opacity 0.8s ease, transform 0.8s ease'; heroLeft.style.opacity = '1'; heroLeft.style.transform = ''; }
+    }, 100);
+    setTimeout(() => {
+      if (heroRight) { heroRight.style.transition = 'opacity 0.8s ease, transform 0.8s ease'; heroRight.style.opacity = '1'; heroRight.style.transform = ''; }
+    }, 300);
+  });
+})();
+
+// ACTIVE NAV
+
+// ACTIVE NAV
+const secs = document.querySelectorAll('section[id]');
+const nls = document.querySelectorAll('.nav-links a:not(.nav-hire):not(.nav-resume)');
+window.addEventListener('scroll', () => {
+  let cur = '';
+  secs.forEach(s => { if (window.scrollY >= s.offsetTop - 80) cur = s.id; });
+  nls.forEach(a => { a.style.color = a.getAttribute('href') === '#' + cur ? 'var(--indigo)' : ''; });
+});
+</script>
+
+</body>
+</html>
